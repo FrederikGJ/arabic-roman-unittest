@@ -1,0 +1,54 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class ConverterTest {
+
+    // Test arabicToRoman method
+    @Test
+    public void testArabicToRomanNormalCases() {
+        assertEquals("I", Converter.arabicToRoman(1));
+        assertEquals("IV", Converter.arabicToRoman(4));
+        assertEquals("IX", Converter.arabicToRoman(9));
+        assertEquals("XLII", Converter.arabicToRoman(42));
+        assertEquals("XCIX", Converter.arabicToRoman(99));
+        assertEquals("DCCCXLV", Converter.arabicToRoman(845));
+        assertEquals("MMXXIV", Converter.arabicToRoman(2024));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testArabicToRomanWithZero() {
+        Converter.arabicToRoman(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testArabicToRomanNegative() {
+        Converter.arabicToRoman(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testArabicToRomanExceedsLimit() {
+        Converter.arabicToRoman(4000);
+    }
+
+    // Test romanToArabic method
+    @Test
+    public void testRomanToArabicNormalCases() {
+        assertEquals(1, Converter.romanToArabic("I"));
+        assertEquals(4, Converter.romanToArabic("IV"));
+        assertEquals(9, Converter.romanToArabic("IX"));
+        assertEquals(42, Converter.romanToArabic("XLII"));
+        assertEquals(99, Converter.romanToArabic("XCIX"));
+        assertEquals(845, Converter.romanToArabic("DCCCXLV"));
+        assertEquals(2024, Converter.romanToArabic("MMXXIV"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRomanToArabicInvalid() {
+        Converter.romanToArabic("ABC");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRomanToArabicEmptyString() {
+        Converter.romanToArabic("");
+    }
+}
